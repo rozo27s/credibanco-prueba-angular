@@ -1,0 +1,25 @@
+<div class="container">    
+    <button type="button" class="btn btn-primary" (click)="actualizar()">Actualizar</button>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>PAN</th>
+                <th>Referencia</th>
+                <th>Total compra</th>
+                <th>Dirección</th>
+                <th>Estado</th>
+                <th>Fecha de creación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of transactions;">
+                <td>{{transaction.pan.pan}}</td>
+                <td>{{transaction.referencia}}</td>
+                <td>{{transaction.totalCompra}}</td>
+                <td>{{transaction.direccion}}</td>
+                <td>{{transaction.estado.estado}}</td>
+                <td>{{transaction.fechaCreacion}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

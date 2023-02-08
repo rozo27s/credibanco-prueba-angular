@@ -1,0 +1,25 @@
+<div class="container">
+    <button type="button" class="btn btn-success" (click)="actualizar()">Actualizar</button>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>PAN</th>
+                <th>Titular</th>
+                <th>Cédula</th>
+                <th>Telefono</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let card of cards">
+                <td>{{card.pan}}</td>
+                <td>{{card.titular}}</td>
+                <td>{{card.cedula}}</td>
+                <td>{{card.telefono}}</td>
+                <td>{{card.tipo.tipo}}</td>
+                <td>{{card.estado.estado}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
