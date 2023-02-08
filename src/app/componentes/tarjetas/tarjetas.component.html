@@ -1,5 +1,10 @@
 <div class="container">
-    <button type="button" class="btn btn-success" (click)="actualizar()">Actualizar</button>
+    <form #myForm="ngForm" class="form-inline">
+        <div class="form-group">
+          <input name="pan" class="form-control" placeholder="PAN" ngModel #name="ngModel" >
+        </div>
+        <button type="button" class="btn btn-success" (click)="findByPan(myForm)">Consultar</button>
+      </form>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -21,5 +26,6 @@
                 <td>{{card.estado.estado}}</td>
             </tr>
         </tbody>
-    </table>
+    </table>    
+    <button type="button" class="btn btn-success" (click)="actualizar()">Consultar todas</button>
 </div>

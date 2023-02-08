@@ -15,6 +15,8 @@ import { TarjetasComponent } from './componentes/tarjetas/tarjetas.component';
 import { TransaccionesComponent } from './componentes/transacciones/transacciones.component';
 import { ServiceCardsService } from './servicio/service-cards.service';
 
+import { FormsModule } from '@angular/forms';
+
 const appRoutes: Routes = [
   { path: 'tarjetas', component: TarjetasComponent},
   { path: 'transacciones', component: TransaccionesComponent}
@@ -28,6 +30,7 @@ const appRoutes: Routes = [
     TransaccionesComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(

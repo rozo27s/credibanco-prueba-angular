@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from 'src/app/modelo/Card';
 import { ServiceCardsService } from 'src/app/servicio/service-cards.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-tarjetas',
@@ -19,6 +20,12 @@ export class TarjetasComponent implements OnInit {
 
   actualizar(){
     this.serviceCardsService.getCards().subscribe((data: any) => {
+      this.cards = data;
+    });
+  }
+
+  findByPan(f:NgForm){
+    this.serviceCardsService.getCardByPan(f.controls.pan.value).subscribe((data: any) => {
       this.cards = data;
     });
   }
