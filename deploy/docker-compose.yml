@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+#Mysql
+  mysql-service:
+    container_name: mysql-service
+    image: mysql:latest
+    restart: on-failure
+    ports:
+      - 3306:3306
+    deploy:
+      replicas: 1
+    volumes:
+        - ./var/lib/mysql:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_USER: root
+        MYSQL_ROOT_PASSWORD: Credi1234
+        MYSQL_DATABASE: transactional_credibanco
+#API-rest-credibanco
+  credibanco-service-api:
+    container_name: api-rest-credibanco
+    image: api-image-credibanco
+    restart: on-failure
+    ports:
+      - 8080:8080
+    deploy:
+      replicas: 1
+    depends_on:
+      - mysql-service
+    links:
+      - mysql-service:host_mysql
+#UI-app-credibanco
+  credibanco-service-ui:
+    container_name: ui-app-credibanco
+    image: ui-image-credibanco
+    restart: on-failure
+    ports:
+      - 4200:4200
+    deploy:
+      replicas: 1
+    depends_on:
+      - credibanco-service-api

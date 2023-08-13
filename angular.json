@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "app-inventario": {
+    "app-credibanco": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app-inventario",
+            "outputPath": "dist/app-credibanco",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,10 +71,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "app-inventario:build:production"
+              "browserTarget": "app-credibanco:build:production"
             },
             "development": {
-              "browserTarget": "app-inventario:build:development"
+              "browserTarget": "app-credibanco:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app-inventario:build"
+            "browserTarget": "app-credibanco:build"
           }
         },
         "test": {

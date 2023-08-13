@@ -13,8 +13,8 @@ import { environment } from 'src/environments/environment';
 export class ServiceCardsService {
 
   environment = environment;
-  private cardsUrl: string = environment.apiUrl + '/cards/find-card';
-  private transactionUrl: string = environment.apiUrl + '/transactions/find-transaction';
+  private cardsUrl: string = '/service-api-rest/api/cards/find-card';
+  private transactionUrl: string = '/service-api-rest/api/transactions/find-transaction';
 
   constructor(private http: HttpClient) { }
 
