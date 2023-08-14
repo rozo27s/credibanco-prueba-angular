@@ -1,0 +1,57 @@
+<div class="container abs-center">
+    <div class="col-md-6">
+        <div class="panel panel-login">
+            <div class="panel-heading">
+                <div class="row text-center">
+                    <h3>LIVEBOOK</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a [routerLink]="['/register']" class="active" id="login-form-link">Register</a>
+                    </div>
+                    <div class="col-xs-6">
+                        <a [routerLink]="['/login']" id="register-form-link">Login</a>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form [formGroup]="profileForm" style="display: block;">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" formControlName="name"
+                                    placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="lastname" formControlName="lastname" class="form-control"
+                                    placeholder="LastName">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" formControlName="email" class="form-control"
+                                    placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password">
+                                <label *ngIf="!profileForm.get('password')?.valid && profileForm.get('password')?.touched" style="color: red">{{ messagePassword }}</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="passwordConfirm" formControlName="passwordConfirm"
+                                    class="form-control" placeholder="Confirm password">
+                                <label *ngIf="!profileForm.get('passwordConfirm')?.valid && profileForm.get('passwordConfirm')?.touched" style="color: red">{{ messagePassword }}</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <input class="form-control btn btn-login" (click)="saveProfile()"
+                                            [disabled]="!profileForm.valid" value="Register Now">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

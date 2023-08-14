@@ -3,42 +3,35 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-//=========
-import { CargoService } from './servicio/cargo.service';
-import { ProductoService } from './servicio/producto.service';
-import { UsuarioService } from './servicio/usuario.service';
-import { ActualizacionService } from './servicio/actualizacion.service';
+
 //========
 import { PrincipalComponent } from './componentes/principal/principal.component';
-import { TarjetasComponent } from './componentes/tarjetas/list-cards/tarjetas.component';
-import { TransaccionesComponent } from './componentes/transacciones/transacciones.component';
-import { ServiceCardsService } from './servicio/service-cards.service';
 
-import { FormsModule } from '@angular/forms';
-import { CreateCardComponent } from './componentes/tarjetas/create-card/create-card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './componentes/login/login.component';
+import { ForgotpasswordComponent } from './componentes/forgotpassword/forgotpassword.component';
+import { RegistroComponent } from './componentes/registro/registro.component';
+import { ProfileService } from './servicio/profile.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PrincipalComponent,
-    TarjetasComponent,
-    TransaccionesComponent,
-    CreateCardComponent
+    LoginComponent,
+    ForgotpasswordComponent,
+    RegistroComponent
   ],
   imports: [
     FormsModule,
     AppRoutingModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
-    CargoService,
-    ProductoService,
-    UsuarioService,
-    ActualizacionService,
-    ServiceCardsService
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })
