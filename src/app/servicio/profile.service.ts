@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { Usuario } from '../modelo/Usuario';
-import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -14,37 +12,23 @@ const httpOptions = {
 })
 export class ProfileService {
 
-  private usuarioUrl: string = '/service-api-rest/api';
-
   //==================================================================CONSTRUCTOR
   constructor(private http: HttpClient) {
-
   }
 
-  //======================================================================================
-  //==============================METODOS OBSERVABLES=====================================
-  //======================================================================================
+  getLogin(credentials: any): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/login', credentials, httpOptions);
+  }
 
-  getLogin(credentials: any): Observable<Usuario[]> {
-    return this.http.post<any>(this.usuarioUrl + '/login', credentials, httpOptions);
+  getProfilesHint(hint: any): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/profile?hint=' + hint,httpOptions);
   }
 
   newProfile(profile: any): Observable<any> {
-    return this.http.post<any>(this.usuarioUrl + '/profile', profile, httpOptions);
+    return this.http.post<any>(environment.apiUrl + '/profile', profile, httpOptions);
   }
 
   rememberPass(data: any): Observable<any> {
-    return this.http.post<any>(this.usuarioUrl + '/login/remember-pass', data, httpOptions);
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error('error');
-      return of(result as T);
-    };
-  }
-
-  private log(message: string) {
-    console.log('UserService: ' + message);
+    return this.http.post<any>(environment.apiUrl + '/login/remember-pass', data, httpOptions);
   }
 }

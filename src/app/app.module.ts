@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 //========
 import { PrincipalComponent } from './componentes/principal/principal.component';
@@ -13,6 +13,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { ForgotpasswordComponent } from './componentes/forgotpassword/forgotpassword.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { ProfileService } from './servicio/profile.service';
+import { HttpMasterInterceptor } from './servicio/interceptor/http.interceptor';
 
 
 @NgModule({
@@ -31,6 +32,11 @@ import { ProfileService } from './servicio/profile.service';
     ReactiveFormsModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpMasterInterceptor,
+      multi: true
+    },
     ProfileService
   ],
   bootstrap: [AppComponent]

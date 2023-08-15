@@ -51,7 +51,7 @@ export class StorageService {
    * Permite la limpieza total de objetos almacenados en el sesionStorage
    */
   clearStorage() {
-    sessionStorage.clear();
+    localStorage.clear();
   }
 
 }

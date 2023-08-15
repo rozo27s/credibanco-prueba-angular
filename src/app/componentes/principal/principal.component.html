@@ -1,1 +1,126 @@
-PRINCIPAL
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"> LIVEBOOK </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a [routerLink]="['/principal']">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a><span class="glyphicon glyphicon-user"></span> {{profileLoginTemp.name}} {{profileLoginTemp.lastname}}</a>
+            </li>
+            <button (click)="logout()" class="btn btn-default navbar-btn">LogOut</button>
+        </ul>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-lg-2">
+        <input class="form-control" (input)="findProfilesByHint($event)" placeholder="Search profile">
+        <br>
+        <ul *ngIf="profiles.length > 0" class="list-group" id="myList">
+            <li class="list-group-item" *ngFor="let profile of profiles; let i = index" (click)="viewProfile(profile.profileId)">
+                {{profile.name}} {{profile.lastname}}</li>
+        </ul>
+    </div>
+    <div class="col-lg-7">
+        <div *ngFor="let publication of publications; let i = index" class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-11">
+                        <h4>{{publication.detailPublication}}</h4>
+                    </div>
+                    <div *ngIf="profileLoginTemp.profileId === profileLogin.profileId" class="col-lg-1">
+                        <button type="button" class="btn btn-info btn-sm"
+                            (click)="trigerUpdate(publication.detailPublication, publication.publicationId)">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-11">
+                        <h6> {{publication.creationDate}}</h6>
+                    </div>
+                    <div *ngIf="profileLoginTemp.profileId === profileLogin.profileId" class="col-lg-1">
+                        <button type="button" class="btn btn-danger btn-sm"
+                            (click)="deletePublication(publication.publicationId)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form [formGroup]="reactionForm">
+                    <div class="input-group input-group-sm ">
+                        <input type="text" class="form-control" formControlName="detailReaction"
+                            placeholder="Reaction ..." aria-describedby="sizing-addon3">
+                        <span class="input-group-addon btn btn-primary"
+                            (click)="saveReaction(publication.publicationId)">ok</span>
+                    </div>
+                </form>
+                <div *ngFor="let reaction of publication.reactions; let i = index" class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{reaction.detailReaction}}</h4>
+                        <h6>{{reaction.profileReaction.name}} {{reaction.profileReaction.lastname}}
+                            {{reaction.profileReaction.creationDate}}</h6>
+                        <div *ngFor="let comment of reaction.comments; let i = index" class="row">
+                            <div class="col-lg-9">
+                                <span class="label label-default">{{comment.detailComment}}<br></span>
+                            </div>
+                            <div class="col-lg-3">
+                                {{comment.profileComment.name}} {{comment.profileComment.lastname}}
+                            </div>
+                        </div>
+                        <br>
+                        <form [formGroup]="comentForm">
+                            <div class="input-group input-group-sm col-lg-3">
+                                <input type="text" class="form-control" formControlName="detailComment"
+                                    placeholder="Comment ..." aria-describedby="sizing-addon3">
+                                <span class="input-group-addon btn btn-primary"
+                                    (click)="saveComment(reaction.reactionId)">ok</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="profileLoginTemp.profileId === profileLogin.profileId" class="col-lg-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>New publication</h4>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-body">
+                        <form [formGroup]="publicationForm">
+                            <div class="form-group">
+                                <label for="email">Detail</label>
+                                <input type="email" class="form-control" formControlName="detailPublication">
+                            </div>
+                            <button type="submit" *ngIf="!publicationForm.get('publicationId')?.value"
+                                (click)="savePublication()" class="btn btn-success"
+                                [disabled]="!publicationForm.valid">Publicar</button>
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <button type="submit" *ngIf="publicationForm.get('publicationId')?.value"
+                                        (click)="updatePublication()" class="btn btn-info"
+                                        [disabled]="!publicationForm.valid">Update</button>
+                                </div>
+                                <div class="col-lg-3">
+                                    <button type="submit" *ngIf="publicationForm.get('publicationId')?.value"
+                                        (click)="cancelUpdate()" class="btn btn-danger"
+                                        [disabled]="!publicationForm.valid">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+    </div>
+</div>
